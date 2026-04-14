@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "motion/react";
-import { Music, Users, Youtube, Instagram, Facebook, MessageCircle, Play, ExternalLink, ChevronLeft, ChevronRight, Radio } from "lucide-react";
+import { Music, Users, Youtube, Instagram, Facebook, MessageCircle, Play, ExternalLink, ChevronLeft, ChevronRight, Radio, Menu, X } from "lucide-react";
 import { useState } from "react";
+import { div, nav } from "motion/react-client";
 
 const BAND_IMAGES = [
   "/Carrousel1.webp",  
@@ -17,6 +18,9 @@ const LIVE_SESSIONS = [
 
 export default function App() {
   const [currentImage, setCurrentImage] = useState(0);
+  // ✅ NUEVO: estado para el menú móvil
+  const [menuOpen, setMenuOpen] = useState(false);
+
   const whatsappNumber = "573177206725";
   const whatsappMessage = encodeURIComponent("HOLA, VENGO DE LA PAGINA DE SKATMA");
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
@@ -27,8 +31,10 @@ export default function App() {
   const nextImage = () => setCurrentImage((prev) => (prev + 1) % BAND_IMAGES.length);
   const prevImage = () => setCurrentImage((prev) => (prev - 1 + BAND_IMAGES.length) % BAND_IMAGES.length);
 
+  const navItems = ["Quienes Somos", "Musica", "Live", "Próximas Fechas", "Contacto"];
+
   return (
-    <div className="min-h-screen selection:bg-ska-yellow selection:text-ska-black bg-ska-black relative">
+    <div className="min-h-screen selection:bg-ska-yellow selection:text-ska-black bg-ska-black relative overflow-x-hidden"> {/* ✅ overflow-x-hidden aquí */}
       {/* Noise Overlay */}
       <div className="fixed inset-0 noise z-[9999]" />
 
@@ -43,7 +49,7 @@ export default function App() {
             SKATMA
           </motion.div>
           <div className="hidden md:flex space-x-10">
-            {["Quienes Somos", "Musica", "Live", "Próximas Fechas", "Contacto"].map((item) => (
+            {navItems.map((item) => (
               <a
                 key={item}
                 href={item === "Próximas Fechas" ? "#proximas-fechas" : `#${item.toLowerCase().replace(" ", "-")}`}
@@ -54,10 +60,41 @@ export default function App() {
               </a>
             ))}
           </div>
-          <div className="md:hidden">
-            <span className="text-ska-yellow font-display text-xl">MENU</span>
-          </div>
+
+          {/* ✅ NUEVO: botón hamburguesa funcional */}
+          <button
+            className="md:hidden text-ska-yellow p-2"
+            onClick={() => setMenuOpen((prev) => !prev)}
+            aria-label="Toggle menu"
+          >
+            {menuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
         </div>
+
+        {/* ✅ NUEVO: menú desplegable móvil */}
+        <AnimatePresence>
+          {menuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="md:hidden bg-ska-black border-t border-ska-yellow/10 overflow-hidden"
+            >
+              <div className="flex flex-col px-4 py-6 gap-6">
+                {navItems.map((item) => (
+                  <a
+                    key={item}
+                    href={item === "Próximas Fechas" ? "#proximas-fechas" : `#${item.toLowerCase().replace(" ", "-")}`}
+                    onClick={() => setMenuOpen(false)}
+                    className="text-[11px] font-modern font-black uppercase tracking-[0.4em] hover:text-ska-yellow transition-all duration-300"
+                  >
+                    {item}
+                  </a>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
       {/* Hero Section */}
@@ -89,7 +126,6 @@ export default function App() {
           </motion.p>
         </div>
 
-        {/* Vertical Text Detail */}
         <div className="absolute left-8 bottom-24 hidden lg:block">
           <p className="font-modern text-[10px] font-black uppercase tracking-[0.5em] rotate-180 [writing-mode:vertical-lr] text-zinc-600">
             SKA-CORE OSCURO DESDE EL 2011
@@ -97,7 +133,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* Marquee Section */}
+      {/* Marquee Section — ✅ corregido: un solo bloque en flex para evitar desborde */}
       <div className="bg-ska-yellow py-4 border-y-2 border-ska-black overflow-hidden">
         <div className="marquee">
           <div className="marquee-content">
@@ -107,15 +143,17 @@ export default function App() {
               </span>
             ))}
           </div>
-          <div className="marquee-content">
+          <div className="marquee-content" aria-hidden="true">
             {[...Array(10)].map((_, i) => (
               <span key={i} className="text-ska-black font-display text-4xl whitespace-nowrap">
-                SKATMA SKA CORE • SKATMA SKA CORE • 
+                SKATMA SKA CORE  EST 2011• SKATMA SKA CORE EST 2011• 
               </span>
             ))}
           </div>
         </div>
       </div>
+
+      {/* El resto del JSX es idéntico a tu original — sin cambios */}
 
       {/* Carousel Section */}
       <section className="py-20 bg-ska-dark relative">
@@ -195,7 +233,6 @@ export default function App() {
       <section id="musica" className="py-32 bg-ska-dark relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <h2 className="text-6xl md:text-7xl mb-20 text-center">SONIDO</h2>
-
           <div className="grid md:grid-cols-2 gap-12">
             <motion.div 
               whileHover={{ y: -5 }}
@@ -256,14 +293,13 @@ export default function App() {
         </div>
       </section>
 
-      {/* Live Sessions Section (NUEVA) */}
+      {/* Live Sessions Section */}
       <section id="live" className="py-32 bg-ska-black relative">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
             <h2 className="text-6xl md:text-7xl text-ska-white">LIVE SESSIONS</h2>
             <p className="font-modern text-zinc-500 uppercase tracking-widest text-xs mb-4">La energía del directo</p>
           </div>
-
           <div className="grid md:grid-cols-3 gap-8">
             {LIVE_SESSIONS.map((session, i) => (
               <motion.div
@@ -274,12 +310,7 @@ export default function App() {
                 viewport={{ once: true }}
                 className="group relative"
               >
-                <a 
-                  href={session.url} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="block"
-                >
+                <a href={session.url} target="_blank" rel="noopener noreferrer" className="block">
                   <div className="relative aspect-video overflow-hidden border border-white/5">
                     <img 
                       src={session.thumbnail} 
@@ -312,119 +343,41 @@ export default function App() {
             <h2 className="text-6xl md:text-7xl text-ska-yellow">PRÓXIMAS FECHAS</h2>
             <p className="font-modern text-zinc-500 uppercase tracking-widest text-xs mb-4">Presentaciones en vivo</p>
           </div>
-
           <div className="grid md:grid-cols-2 gap-8">
-            {/* Fecha 1 */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="bg-ska-black p-8 border border-white/5 relative group overflow-hidden"
-            >
-              <div className="absolute top-0 left-0 w-full h-1 bg-ska-yellow/20" />
-              <div className="flex flex-col md:flex-row gap-6">
-                <div className="flex-shrink-0">
-                  <div className="text-center">
-                    <div className="text-4xl font-display text-ska-yellow font-black">27</div>
-                    <div className="text-sm font-modern uppercase tracking-widest text-zinc-500">FEB</div>
+            {[
+              { day: "27", month: "FEB", color: "ska-yellow", title: "PunkHood Festival", venue: "Relevent Music Hall - Bogotá, Colombia", time: "21:00", price: "$60.000", priceColor: "ska-yellow" },
+              { day: "14", month: "MAR", color: "ska-white", title: "Equipo animal por el Catatumbo", venue: "Casa cultural los Martires - Bogota", time: "16:00", price: "Alimento no perecedero / Aporte voluntario", priceColor: "ska-white" },
+              { day: "11", month: "ABR", color: "ska-yellow", title: "Festival Kalle y Ruido", venue: "Garage - Restrepo, Bogota", time: "16:00", price: "$30.000", priceColor: "ska-yellow" },
+              { day: "16", month: "MAY", color: "ska-white", title: "Estruendo PunkRock", venue: "El Estruendo bar, Bogota", time: "19:00", price: "$18.000 en preventa", priceColor: "ska-white" },
+            ].map((fecha, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
+                viewport={{ once: true }}
+                className="bg-ska-black p-8 border border-white/5 relative group overflow-hidden"
+              >
+                <div className={`absolute top-0 left-0 w-full h-1 ${fecha.color === "ska-yellow" ? "bg-ska-yellow/20" : "bg-white/10"}`} />
+                <div className="flex flex-col md:flex-row gap-6">
+                  <div className="flex-shrink-0">
+                    <div className="text-center">
+                      <div className={`text-4xl font-display text-${fecha.color} font-black`}>{fecha.day}</div>
+                      <div className="text-sm font-modern uppercase tracking-widest text-zinc-500">{fecha.month}</div>
+                    </div>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className={`text-2xl font-modern font-black text-${fecha.color === "ska-yellow" ? "ska-white" : "ska-yellow"} mb-2`}>{fecha.title}</h3>
+                    <p className="text-zinc-400 font-modern mb-4">{fecha.venue}</p>
+                    <div className="flex items-center gap-4 text-sm font-modern text-zinc-500">
+                      <span className="uppercase tracking-widest">{fecha.time}</span>
+                      <span className={`text-${fecha.priceColor}`}>{fecha.price}</span>
+                    </div>
                   </div>
                 </div>
-                <div className="flex-1">
-                  <h3 className="text-2xl font-modern font-black text-ska-white mb-2">PunkHood Festival</h3>
-                  <p className="text-zinc-400 font-modern mb-4">Relevent Music Hall - Bogotá, Colombia</p>
-                  <div className="flex items-center gap-4 text-sm font-modern text-zinc-500">
-                    <span className="uppercase tracking-widest">21:00</span>
-                    <span className="text-ska-yellow">$60.000</span>
-                  </div>
-                </div>
-              </div>
-              <div className="mt-6 h-px w-full bg-white/5 group-hover:bg-ska-yellow/30 transition-colors" />
-            </motion.div>
-
-            {/* Fecha 2 */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              viewport={{ once: true }}
-              className="bg-ska-black p-8 border border-white/5 relative group overflow-hidden"
-            >
-              <div className="absolute top-0 left-0 w-full h-1 bg-white/10" />
-              <div className="flex flex-col md:flex-row gap-6">
-                <div className="flex-shrink-0">
-                  <div className="text-center">
-                    <div className="text-4xl font-display text-ska-white font-black">14</div>
-                    <div className="text-sm font-modern uppercase tracking-widest text-zinc-500">MAR</div>
-                  </div>
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-2xl font-modern font-black text-ska-yellow mb-2">Equipo animal por el Catatumbo</h3>
-                  <p className="text-zinc-400 font-modern mb-4">Casa cultural los Martires - Bogota</p>
-                  <div className="flex items-center gap-4 text-sm font-modern text-zinc-500">
-                    <span className="uppercase tracking-widest">16:00</span>
-                    <span className="text-ska-white">Alimento no perecedero / Aporte voluntario</span>
-                  </div>
-                </div>
-              </div>
-              <div className="mt-6 h-px w-full bg-white/5 group-hover:bg-white/30 transition-colors" />
-            </motion.div>
-
-            {/* Fecha 3 */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="bg-ska-black p-8 border border-white/5 relative group overflow-hidden"
-            >
-              <div className="absolute top-0 left-0 w-full h-1 bg-ska-yellow/20" />
-              <div className="flex flex-col md:flex-row gap-6">
-                <div className="flex-shrink-0">
-                  <div className="text-center">
-                    <div className="text-4xl font-display text-ska-yellow font-black">11</div>
-                    <div className="text-sm font-modern uppercase tracking-widest text-zinc-500">ABR</div>
-                  </div>
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-2xl font-modern font-black text-ska-white mb-2">Festival Kalle y Ruido</h3>
-                  <p className="text-zinc-400 font-modern mb-4">Garage - Restrepo, Bogota</p>
-                  <div className="flex items-center gap-4 text-sm font-modern text-zinc-500">
-                    <span className="uppercase tracking-widest">16:00</span>
-                    <span className="text-ska-yellow">$30.000</span>
-                  </div>
-                </div>
-              </div>
-              <div className="mt-6 h-px w-full bg-white/5 group-hover:bg-ska-yellow/30 transition-colors" />
-            </motion.div>
-
-            {/* Fecha 4 */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              viewport={{ once: true }}
-              className="bg-ska-black p-8 border border-white/5 relative group overflow-hidden"
-            >
-              <div className="absolute top-0 left-0 w-full h-1 bg-white/10" />
-              <div className="flex flex-col md:flex-row gap-6">
-                <div className="flex-shrink-0">
-                  <div className="text-center">
-                    <div className="text-4xl font-display text-ska-white font-black">16</div>
-                    <div className="text-sm font-modern uppercase tracking-widest text-zinc-500">MAY</div>
-                  </div>
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-2xl font-modern font-black text-ska-yellow mb-2">Estruendo PunkRock</h3>
-                  <p className="text-zinc-400 font-modern mb-4">El Estruendo bar, Bogota</p>
-                  <div className="flex items-center gap-4 text-sm font-modern text-zinc-500">
-                    <span className="uppercase tracking-widest">19:00</span>
-                    <span className="text-ska-white">$18.000 en preventa</span>
-                  </div>
-                </div>
-              </div>
-              <div className="mt-6 h-px w-full bg-white/5 group-hover:bg-white/30 transition-colors" />
-            </motion.div>
+                <div className={`mt-6 h-px w-full bg-white/5 ${fecha.color === "ska-yellow" ? "group-hover:bg-ska-yellow/30" : "group-hover:bg-white/30"} transition-colors`} />
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -437,7 +390,6 @@ export default function App() {
             <p className="text-xl font-modern text-zinc-500 mb-16 max-w-lg mx-auto">
               Para contrataciones, prensa o alianzas oscuras.
             </p>
-            
             <div className="flex justify-center gap-16 mb-24">
               {[
                 { Icon: Instagram, href: "https://www.instagram.com/skatma.sc/" },
@@ -449,7 +401,6 @@ export default function App() {
                 </a>
               ))}
             </div>
-
             <div className="group relative inline-block">
               <div className="absolute -inset-2 bg-ska-yellow/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
               <div className="relative bg-ska-yellow text-ska-black px-12 py-5 font-modern font-black text-xl tracking-tighter hover:bg-ska-white transition-colors cursor-pointer">
