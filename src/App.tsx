@@ -10,9 +10,9 @@ const BAND_IMAGES = [
 ];
 
 const LIVE_SESSIONS = [
-  { id: "1", title: "En Vivo en  El parque Santander", thumbnail: "Carrousel2.webp", url: "#" },
-  { id: "2", title: "Skatma Live Session - SAPO", thumbnail: "sapo.webp", url: "https://www.youtube.com/watch?v=_IdjIAl_3KU" },
-  { id: "3", title: "Ska para Todos Fest - LA SOLUCIÓN", thumbnail: "Carrousel1.webp", url: "https://www.youtube.com/watch?v=sLWByZZbB-o" },
+  { id: "1", title: "En Vivo en  El parque Santander", thumbnail: "/Carrousel2.webp", url: "#" },
+  { id: "2", title: "Skatma Live Session - SAPO", thumbnail: "/sapo.webp", url: "https://www.youtube.com/watch?v=_IdjIAl_3KU" },
+  { id: "3", title: "Ska para Todos Fest - LA SOLUCIÓN", thumbnail: "/Carrousel1.webp", url: "https://www.youtube.com/watch?v=sLWByZZbB-o" },
 ];
 
 export default function App() {
@@ -182,7 +182,7 @@ export default function App() {
           <div className="relative group">
             <div className="absolute -inset-2 border border-ska-yellow/20 group-hover:rotate-0 transition-transform duration-500 rotate-3 pointer-events-none" />
             <img 
-              src="Historia.webp" 
+              src="/Historia.webp" 
               alt="Skatma Live" 
               className="w-full grayscale contrast-125 border border-white/5"
               referrerPolicy="no-referrer"
