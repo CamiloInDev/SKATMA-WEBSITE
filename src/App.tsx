@@ -17,8 +17,8 @@ const LIVE_SESSIONS = [
 
 export default function App() {
   const [currentImage, setCurrentImage] = useState(0);
-  const whatsappNumber = "1234567890"; // Reemplazar con el número real
-  const whatsappMessage = encodeURIComponent("¡Hola! Vengo de la web de Skatma y me gustaría saber más sobre la banda.");
+  const whatsappNumber = "573177206725";
+  const whatsappMessage = encodeURIComponent("HOLA, VENGO DE LA PAGINA DE SKATMA");
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
   const SHOW_LOGO_IMAGE = true; 
@@ -432,9 +432,13 @@ export default function App() {
             </p>
             
             <div className="flex justify-center gap-16 mb-24">
-              {[Instagram, Facebook, MessageCircle].map((Icon, i) => (
-                <a key={i} href="#" className="text-zinc-600 hover:text-ska-yellow transition-all hover:-translate-y-2">
-                  <Icon size={32} />
+              {[
+                { Icon: Instagram, href: "#" },
+                { Icon: Facebook, href: "#" },
+                { Icon: MessageCircle, href: whatsappUrl }
+              ].map((item, i) => (
+                <a key={i} href={item.href} target="_blank" rel="noopener noreferrer" className="text-zinc-600 hover:text-ska-yellow transition-all hover:-translate-y-2">
+                  <item.Icon size={32} />
                 </a>
               ))}
             </div>
