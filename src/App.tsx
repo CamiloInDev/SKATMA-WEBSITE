@@ -10,9 +10,9 @@ const BAND_IMAGES = [
 ];
 
 const LIVE_SESSIONS = [
-  { id: "1", title: "En Vivo en  El parque Santander", thumbnail: "https://picsum.photos/seed/live1/600/400", url: "#" },
-  { id: "2", title: "Skatma Live Session 1", thumbnail: "https://picsum.photos/seed/live2/600/400", url: "#" },
-  { id: "3", title: "Ska para Todos Fest", thumbnail: "https://picsum.photos/seed/live3/600/400", url: "#" },
+  { id: "1", title: "En Vivo en  El parque Santander", thumbnail: "Carrousel2.webp", url: "#" },
+  { id: "2", title: "Skatma Live Session - SAPO", thumbnail: "sapo.webp", url: "https://www.youtube.com/watch?v=_IdjIAl_3KU" },
+  { id: "3", title: "Ska para Todos Fest - LA SOLUCIÓN", thumbnail: "Carrousel1.webp", url: "https://www.youtube.com/watch?v=sLWByZZbB-o" },
 ];
 
 export default function App() {
@@ -274,24 +274,31 @@ export default function App() {
                 viewport={{ once: true }}
                 className="group relative"
               >
-                <div className="relative aspect-video overflow-hidden border border-white/5">
-                  <img 
-                    src={session.thumbnail} 
-                    alt={session.title} 
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
-                    referrerPolicy="no-referrer"
-                  />
-                  <div className="absolute inset-0 bg-ska-black/40 group-hover:bg-transparent transition-colors" />
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                    <div className="w-16 h-16 bg-ska-yellow flex items-center justify-center rounded-full text-ska-black">
-                      <Play fill="currentColor" size={24} />
+                <a 
+                  href={session.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="block"
+                >
+                  <div className="relative aspect-video overflow-hidden border border-white/5">
+                    <img 
+                      src={session.thumbnail} 
+                      alt={session.title} 
+                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                      referrerPolicy="no-referrer"
+                    />
+                    <div className="absolute inset-0 bg-ska-black/40 group-hover:bg-transparent transition-colors" />
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div className="w-16 h-16 bg-ska-yellow flex items-center justify-center rounded-full text-ska-black">
+                        <Play fill="currentColor" size={24} />
+                      </div>
                     </div>
                   </div>
-                </div>
-                <h3 className="mt-6 text-lg font-modern font-black uppercase tracking-widest group-hover:text-ska-yellow transition-colors">
-                  {session.title}
-                </h3>
-                <div className="mt-2 h-px w-full bg-white/5 group-hover:bg-ska-yellow/30 transition-colors" />
+                  <h3 className="mt-6 text-lg font-modern font-black uppercase tracking-widest group-hover:text-ska-yellow transition-colors">
+                    {session.title}
+                  </h3>
+                  <div className="mt-2 h-px w-full bg-white/5 group-hover:bg-ska-yellow/30 transition-colors" />
+                </a>
               </motion.div>
             ))}
           </div>
@@ -319,16 +326,16 @@ export default function App() {
               <div className="flex flex-col md:flex-row gap-6">
                 <div className="flex-shrink-0">
                   <div className="text-center">
-                    <div className="text-4xl font-display text-ska-yellow font-black">15</div>
-                    <div className="text-sm font-modern uppercase tracking-widest text-zinc-500">MAR</div>
+                    <div className="text-4xl font-display text-ska-yellow font-black">27</div>
+                    <div className="text-sm font-modern uppercase tracking-widest text-zinc-500">FEB</div>
                   </div>
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-2xl font-modern font-black text-ska-white mb-2">Ska Underground Festival</h3>
-                  <p className="text-zinc-400 font-modern mb-4">La Distritoría - Bogotá, Colombia</p>
+                  <h3 className="text-2xl font-modern font-black text-ska-white mb-2">PunkHood Festival</h3>
+                  <p className="text-zinc-400 font-modern mb-4">Relevent Music Hall - Bogotá, Colombia</p>
                   <div className="flex items-center gap-4 text-sm font-modern text-zinc-500">
                     <span className="uppercase tracking-widest">21:00</span>
-                    <span className="text-ska-yellow">$25.000</span>
+                    <span className="text-ska-yellow">$60.000</span>
                   </div>
                 </div>
               </div>
@@ -347,16 +354,16 @@ export default function App() {
               <div className="flex flex-col md:flex-row gap-6">
                 <div className="flex-shrink-0">
                   <div className="text-center">
-                    <div className="text-4xl font-display text-ska-white font-black">22</div>
+                    <div className="text-4xl font-display text-ska-white font-black">14</div>
                     <div className="text-sm font-modern uppercase tracking-widest text-zinc-500">MAR</div>
                   </div>
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-2xl font-modern font-black text-ska-yellow mb-2">Noche de Ska Core</h3>
-                  <p className="text-zinc-400 font-modern mb-4">Rock al Parque - Medellín, Colombia</p>
+                  <h3 className="text-2xl font-modern font-black text-ska-yellow mb-2">Equipo animal por el Catatumbo</h3>
+                  <p className="text-zinc-400 font-modern mb-4">Casa cultural los Martires - Bogota</p>
                   <div className="flex items-center gap-4 text-sm font-modern text-zinc-500">
-                    <span className="uppercase tracking-widest">20:00</span>
-                    <span className="text-ska-white">$30.000</span>
+                    <span className="uppercase tracking-widest">16:00</span>
+                    <span className="text-ska-white">Alimento no perecedero / Aporte voluntario</span>
                   </div>
                 </div>
               </div>
@@ -375,16 +382,16 @@ export default function App() {
               <div className="flex flex-col md:flex-row gap-6">
                 <div className="flex-shrink-0">
                   <div className="text-center">
-                    <div className="text-4xl font-display text-ska-yellow font-black">05</div>
+                    <div className="text-4xl font-display text-ska-yellow font-black">11</div>
                     <div className="text-sm font-modern uppercase tracking-widest text-zinc-500">ABR</div>
                   </div>
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-2xl font-modern font-black text-ska-white mb-2">Resistencia Ska Tour</h3>
-                  <p className="text-zinc-400 font-modern mb-4">El Garage - Cali, Colombia</p>
+                  <h3 className="text-2xl font-modern font-black text-ska-white mb-2">Festival Kalle y Ruido</h3>
+                  <p className="text-zinc-400 font-modern mb-4">Garage - Restrepo, Bogota</p>
                   <div className="flex items-center gap-4 text-sm font-modern text-zinc-500">
-                    <span className="uppercase tracking-widest">22:30</span>
-                    <span className="text-ska-yellow">$20.000</span>
+                    <span className="uppercase tracking-widest">16:00</span>
+                    <span className="text-ska-yellow">$30.000</span>
                   </div>
                 </div>
               </div>
@@ -403,16 +410,16 @@ export default function App() {
               <div className="flex flex-col md:flex-row gap-6">
                 <div className="flex-shrink-0">
                   <div className="text-center">
-                    <div className="text-4xl font-display text-ska-white font-black">18</div>
-                    <div className="text-sm font-modern uppercase tracking-widest text-zinc-500">ABR</div>
+                    <div className="text-4xl font-display text-ska-white font-black">16</div>
+                    <div className="text-sm font-modern uppercase tracking-widest text-zinc-500">MAY</div>
                   </div>
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-2xl font-modern font-black text-ska-yellow mb-2">Punk & Ska Rebellion</h3>
-                  <p className="text-zinc-400 font-modern mb-4">Casa de la Música - Bucaramanga, Colombia</p>
+                  <h3 className="text-2xl font-modern font-black text-ska-yellow mb-2">Estruendo PunkRock</h3>
+                  <p className="text-zinc-400 font-modern mb-4">El Estruendo bar, Bogota</p>
                   <div className="flex items-center gap-4 text-sm font-modern text-zinc-500">
-                    <span className="uppercase tracking-widest">21:00</span>
-                    <span className="text-ska-white">$35.000</span>
+                    <span className="uppercase tracking-widest">19:00</span>
+                    <span className="text-ska-white">$18.000 en preventa</span>
                   </div>
                 </div>
               </div>
@@ -433,8 +440,8 @@ export default function App() {
             
             <div className="flex justify-center gap-16 mb-24">
               {[
-                { Icon: Instagram, href: "#" },
-                { Icon: Facebook, href: "#" },
+                { Icon: Instagram, href: "https://www.instagram.com/skatma.sc/" },
+                { Icon: Facebook, href: "https://www.facebook.com/skatma.skacore" },
                 { Icon: MessageCircle, href: whatsappUrl }
               ].map((item, i) => (
                 <a key={i} href={item.href} target="_blank" rel="noopener noreferrer" className="text-zinc-600 hover:text-ska-yellow transition-all hover:-translate-y-2">
@@ -462,7 +469,7 @@ export default function App() {
           </div>
           <div className="text-right">
             <p className="text-zinc-700 text-[10px] font-modern uppercase tracking-[0.5em] mb-2">
-              © {new Date().getFullYear()} • Memento Mori • Skatma
+              © {new Date().getFullYear()} • CamiloInDev • Skatma
             </p>
             <p className="text-zinc-800 text-[8px] font-modern uppercase tracking-[0.3em]">
               Designed for the resistance
