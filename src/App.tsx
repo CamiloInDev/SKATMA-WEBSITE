@@ -72,7 +72,7 @@ export default function App() {
             transition={{ duration: 1, ease: "easeOut" }}
           >
             {SHOW_LOGO_IMAGE ? (
-              <img src={LOGO_URL} alt="Skatma Logo" className="max-w-2xl md:max-w-4xl mx-auto mb-8" referrerPolicy="no-referrer" />
+              <img src={LOGO_URL} alt="Skatma Logo" className="w-[80%] max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-4xl mx-auto mb-8" referrerPolicy="no-referrer" />
             ) : (
               <h1 className="text-8xl md:text-[14rem] leading-none mb-4 text-ska-white drop-shadow-[0_10px_10px_rgba(0,0,0,0.8)] tracking-tighter">
                 SKATMA
