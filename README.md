@@ -1,20 +1,58 @@
+# SKATMA - Ska Core Band
+
 <div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+  <h2>Skatma Ska Core</h2>
+  <p>Oscuridad · Resistencia · Música</p>
 </div>
 
-# Run and deploy your AI Studio app
+Landing page oficial de Skatma, banda de Ska Core. Construida con React, TypeScript y Tailwind CSS.
 
-This contains everything you need to run your app locally.
+## Características
 
-View your app in AI Studio: https://ai.studio/apps/7d36cb69-4c44-4f32-97bc-fbea75667879
+- Diseño moderno y oscuro con estética gótica
+- Carrusel de imágenes de la banda
+- Integración con Spotify y YouTube
+- Sección de Live Sessions
+- Contacto directo por WhatsApp
+- Totalmente responsiva
 
-## Run Locally
+## Tecnologías
 
-**Prerequisites:**  Node.js
+- **React 18** - Framework frontend
+- **TypeScript** - Tipado seguro
+- **Tailwind CSS v4** - Estilos modernos
+- **Framer Motion** - Animaciones fluidas
 
+## Ejecutar Localmente
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+**Prerrequisitos:** Node.js 18+
+
+1. Instalar dependencias:
+   ```bash
+   npm install
+   ```
+
+2. Ejecutar el servidor de desarrollo:
+   ```bash
+   npm run dev
+   ```
+
+3. Abrir [http://localhost:5173](http://localhost:5173) en tu navegador
+
+## Personalización
+
+Para personalizar el contenido, revisa el archivo [INSTRUCCIONES.md](./INSTRUCCIONES.md) donde encontrarás guías detalladas para:
+
+- Reemplazar logo
+- Editar imágenes del carrusel
+- Integrar Spotify y YouTube
+- Configurar Live Sessions
+- Ajustar colores y estilos
+
+## Despliegue
+
+El proyecto está configurado para despliegue automático mediante GitHub Actions.
+
+---
+
+*Skatma - Ska Core · Oscuridad · Resistencia*
